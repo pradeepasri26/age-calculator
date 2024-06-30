@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calculator">
+    <h1>AGE CALCULATOR</h1>
+    <h2>Enter your age</h2><br>
+    <input type="date" id="dob">
+    <button id="submit">calculate</button>
+    <p id="year"></p>
+    <p id="month"></p>
+    <p id="day"></p>
+    </div>
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            const dob = document.getElementById('dob').value;
+            if (!dob) {
+                alert('Please enter your birthdate');
+                return;
+            }
+            
+            const birthDate = new Date(dob);
+            const today = new Date();
+            
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            document.getElementById('year').innerText = `Years: ${years}`;
+            document.getElementById('month').innerText = `Months: ${months}`;
+            document.getElementById('day').innerText = `Days: ${days}`;
+        });
+        
+    </script>
+</body>
+</html>
